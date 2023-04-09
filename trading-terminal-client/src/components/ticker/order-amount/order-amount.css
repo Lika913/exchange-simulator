@@ -1,0 +1,21 @@
+.order-volume {
+    width: 187px;
+    padding: 5px;
+    border-radius: 10px;
+    border: 2px dashed var(--gray) ;
+    color: var(--gray);    
+    font-family: Courier, monospace;
+    font-weight: 600;
+    outline: none;
+}
+
+.order-volume:hover,
+.order-volume:focus {
+    border: 2px solid black;
+    color: black;
+}
+
+.order-volume::-webkit-outer-spin-button,
+.order-volume::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}

@@ -1,0 +1,16 @@
+.button {
+    width: 90px;
+    padding: 3px;
+    color: var(--gray);    
+    font-family: Courier, monospace;
+    font-weight: 600;
+    font-size: medium;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 2px black solid;
+    user-select: none;
+}
+
+.button:hover {
+    opacity: 0.7;
+}

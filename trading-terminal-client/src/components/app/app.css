@@ -1,0 +1,6 @@
+.app {
+    display: flex;
+    gap: 50px;
+    margin-left: calc((100% - 1100px) / 2);
+    margin-top: 90px;
+}

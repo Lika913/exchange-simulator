@@ -1,0 +1,19 @@
+.trading-instrument {
+    width: 100%;
+    padding: 5px;
+    border-radius: 10px;
+    border: 2px dashed var(--gray);
+    color: var(--gray);
+    font-family: Courier, monospace;
+    font-weight: 600;
+    cursor: pointer;
+    background: white;
+}
+
+.trading-instrument:hover,
+.trading-instrument:focus {
+    border: 2px solid black;
+    color: black;
+}
+
+ 

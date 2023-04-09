@@ -1,0 +1,27 @@
+.orders {
+    display: grid;
+    grid-template-columns: 0.5fr 2.5fr 2fr 1.5fr 1fr 1fr 1fr 2fr 5px;
+    justify-items: center;
+    gap: 12px;
+    padding: 10px;
+    overflow: auto;
+    overflow-x: hidden;
+    font-size: small;
+}
+
+.orders::-webkit-scrollbar {
+    width: 5px;
+}
+
+.orders::-webkit-scrollbar-track {
+    -moz-box-shadow: 5px 5px 5px -5px var(--shadow-color) inset;
+    box-shadow: 5px 5px 5px -5px var(--shadow-color) inset;
+    border-radius: 10px;
+    margin: 2px;
+}
+
+.orders::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: var(--gray-light);
+    -moz-background: linear-gradient(180deg, #00c6fb, #005bea);
+}

@@ -1,0 +1,11 @@
+.header {
+    display: grid;
+    grid-template-columns: 0.5fr 2.5fr 2fr 1.5fr 1fr 1fr 1fr 2fr 5px;
+    justify-items: center;
+    gap: 12px;
+    padding: 10px;
+    padding-bottom: 0px;
+    background-color: var(--main-background-color);
+    position: sticky;
+    top: 0;
+}

@@ -1,0 +1,1 @@
+export type Instrument = "eur_usd" | "eur_rub" | "usd_rub"

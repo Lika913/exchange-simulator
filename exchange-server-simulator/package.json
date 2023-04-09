@@ -1,0 +1,22 @@
+{
+  "name": "exchange-server-simulator",
+  "version": "1.0.0",
+  "description": "Симуляция сервера для полноценной работы клиента",
+  "main": "index.ts",
+  "scripts": {
+    "start": "ts-node src/index.ts"
+  },
+  "author": "frolova lika",
+  "license": "ISC",
+  "dependencies": {
+    "@types/ws": "^8.5.4",
+    "uuid": "^9.0.0",
+    "ws": "^8.13.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.11",
+    "@types/uuid": "^9.0.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.3"
+  }
+}

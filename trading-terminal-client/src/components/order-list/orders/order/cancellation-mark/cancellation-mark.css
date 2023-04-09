@@ -1,0 +1,21 @@
+.cancellation-mark {
+    background: var(--gray-light);
+    height: 10px;
+    width: 2px;
+    cursor: pointer; 
+    border-radius: 5px;
+    transform: rotate(45deg);
+    visibility: hidden;
+}
+
+.cancellation-mark:after {
+    background: var(--gray-light);
+    position: absolute;
+    cursor: pointer;
+    content: "";
+    height: 2px;    
+    width: 10px;
+    left: -4px;
+    top: 4px;
+    border-radius: 5px;
+}

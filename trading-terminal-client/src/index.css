@@ -1,0 +1,30 @@
+body {
+  margin: 0;
+  font-family: Courier, monospace;
+  font-weight: 600;
+  color: var(--gray);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+:root {
+  --gray: #505050;
+  --buy-button-color: #aacfc4;
+  --sell-button-color: #eabbbe;
+
+  --buy-text-color: #0c8360;
+  --sell-text-color: #d86b72;
+
+  --gray-light: #8d9794;
+  --gray-ultra-light: #cfd8d6;
+
+  --primary-color: #7cbdaa;
+  
+  --main-background-color:  #ecf1ee;
+  --shadow-color: #93a098;
+}
