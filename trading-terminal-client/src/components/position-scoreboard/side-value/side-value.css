@@ -1,0 +1,13 @@
+.side-position {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 14px;
+}
+
+.side-position label {
+    font-size: 11px;
+    border: 1px solid var(--gray);
+    border-radius: 3px;
+    padding: 2px;
+}

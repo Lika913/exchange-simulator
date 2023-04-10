@@ -1,4 +1,4 @@
-import { ICellProps } from '../../../../../../types/props/cell-props';
+import { ICellProps } from '../../../types/props/cell-props';
 import './cell.css';
 
 const Cell = (props: ICellProps): JSX.Element => {
@@ -6,10 +6,10 @@ const Cell = (props: ICellProps): JSX.Element => {
     return (
         <div 
             className="cell" 
-            style={props.color ? {
+            style={{
                 color: props.color,
-                fontWeight: "bold"
-            } : {}}
+                fontWeight: props.weight
+            }}
         >
             { props.value}
         </div>

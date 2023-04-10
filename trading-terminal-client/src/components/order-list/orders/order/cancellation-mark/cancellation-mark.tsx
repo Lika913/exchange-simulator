@@ -1,12 +1,12 @@
 import { useContext } from 'react';
 import { ICancellationMarkProps } from '../../../../../types/props/cancellation-mark-props';
 import './cancellation-mark.css';
-import { SendMassegeDiapatch } from '../../../../context-provider/context-provider';
+import { SendMassegeDispatch } from '../../../../context-provider/context-provider';
 import { IWebsocketClient } from '../../../../../types/websocket-client';
 
 const CancellationMark = (props: ICancellationMarkProps): JSX.Element => {
 
-  const websocketClient = useContext(SendMassegeDiapatch) as IWebsocketClient;
+  const websocketClient = useContext(SendMassegeDispatch) as IWebsocketClient;
 
   const cancelOrder = () => {
     websocketClient.cancelOrder(props.order.id as number)

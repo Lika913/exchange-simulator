@@ -1,9 +1,9 @@
-import './place-order.css';
-import { IPlaceOrderProps } from '../../../types/props/place-order-props';
+import './side-order.css';
+import { ISideOrderProps } from '../../../types/props/side-order-props';
 import Button from './button/button';
 import Price from './price/price';
 
-const PlaceOrder = (props: IPlaceOrderProps): JSX.Element => {
+const SideOrder = (props: ISideOrderProps): JSX.Element => {
 
   return (
     <div className="place-order">
@@ -18,4 +18,4 @@ const PlaceOrder = (props: IPlaceOrderProps): JSX.Element => {
   );
 }
 
-export default PlaceOrder;
+export default SideOrder;

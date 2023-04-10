@@ -7,7 +7,7 @@ export const orders: IOrder[] = [
         change_time:  new Date("04-05-2023"),
         status: "Cancelled",
         side: 'Buy',
-        price: 5.43,
+        price: 657800,
         amount: 1000,
         instrument: 'eur_rub'
     },
@@ -27,9 +27,9 @@ export const orders: IOrder[] = [
         change_time: new Date("04-01-2023"),
         status: 'Active',
         side: 'Buy',
-        price: 5.43,
-        amount: 1000,
-        instrument: 'eur_rub'
+        price: 112433975.56,
+        amount: 5556,
+        instrument: 'eur_usd'
     },
     {
         id: 4,
@@ -37,9 +37,9 @@ export const orders: IOrder[] = [
         change_time: new Date("04-02-2023"),
         status: "Active",
         side: 'Buy',
-        price: 5.43,
-        amount: 1000,
-        instrument: 'eur_rub'
+        price: 4319.765,
+        amount: 34,
+        instrument: 'eur_usd'
     },
     {
         id: 3,
@@ -47,28 +47,28 @@ export const orders: IOrder[] = [
         change_time: new Date("03-30-2023"),
         status: "Filled",
         side: 'Buy',
-        price: 5.43,
-        amount: 1000,
-        instrument: 'eur_rub'
+        price: 34345.09,
+        amount: 103,
+        instrument: 'usd_rub'
     },
     {
         id: 2,
         creation_time: new Date("04-05-2023"),
-        change_time: new Date("04-05-2023"),
-        status: 'Active',
+        change_time: new Date("06-05-2023"),
+        status: 'Rejected',
         side: 'Sell',
-        price: 5.43,
+        price: 65461.89,
         amount: 1000,
-        instrument: 'eur_rub'
+        instrument: 'eur_usd'
     },
     {
         id: 1,
         creation_time: new Date("04-01-2023"),
         change_time: new Date("04-01-2023"),
         status: 'Active',
-        side: 'Buy',
+        side: 'Sell',
         price: 5.43,
-        amount: 1000,
-        instrument: 'eur_rub'
+        amount: 1,
+        instrument: 'eur_usd'
     },
 ]

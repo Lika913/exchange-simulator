@@ -13,18 +13,12 @@ code {
 }
 
 :root {
-  --gray: #505050;
-  --buy-button-color: #aacfc4;
-  --sell-button-color: #eabbbe;
-
-  --buy-text-color: #0c8360;
-  --sell-text-color: #d86b72;
-
+  --gray: #505050;  
   --gray-light: #8d9794;
-  --gray-ultra-light: #cfd8d6;
-
-  --primary-color: #7cbdaa;
-  
-  --main-background-color:  #ecf1ee;
+  --buy-light-color: #aacfc4;
+  --sell-light-color: #eabbbe;
+  --buy-color: #0c8360;
+  --sell-text-color: #d86b72;
+  --primary-color: #ecf1ee;
   --shadow-color: #93a098;
 }

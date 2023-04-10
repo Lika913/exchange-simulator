@@ -11,13 +11,18 @@ import { PlaceOrder } from './methods/place-order';
 import { CancelOrder } from './methods/cancel-order';
 import { ICancelOrderMessage } from './types/incoming-messages/cancel-order-message';
 import { IPlaceOrderMessage } from './types/incoming-messages/place-order-message';
-import { ImitateChangeStatus, ImitatePricesChange } from './helpers/actions-imitation';
+import { ImitateFulfillmentOrder, ImitatePricesChange } from './helpers/actions-imitation';
+import { PositionUpdateData } from './methods/position-update-data';
 
 const wsServer: WebSocketServer = new WebSocketServer({ port: 9000 });
 
 wsServer.on('connection', (wsClient: WebSocket) => {
-    const subscriptions: ISubscription[] = []
 
+    ExecutionReport(wsClient);
+    PositionUpdateData(wsClient);
+
+    const subscriptions: ISubscription[] = []
+   
     wsClient.on('message', (message: string) => {
         const messageData: IMessage = JSON.parse(message)
 
@@ -34,9 +39,6 @@ wsServer.on('connection', (wsClient: WebSocket) => {
             case MESSAGE_FROM_CLIENT.CancelOrder:
                 CancelOrder(messageData.message as ICancelOrderMessage, wsServer);
                 break;
-            case MESSAGE_FROM_CLIENT.ExecutionReport:
-                ExecutionReport(wsClient);
-                break;
         }
     })
 
@@ -47,4 +49,4 @@ wsServer.on('connection', (wsClient: WebSocket) => {
     const intervalId = ImitatePricesChange(subscriptions, wsClient)
 });
 
-ImitateChangeStatus(wsServer)
+ImitateFulfillmentOrder(wsServer)

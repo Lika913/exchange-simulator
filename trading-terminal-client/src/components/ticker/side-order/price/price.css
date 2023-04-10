@@ -1,0 +1,7 @@
+.price {
+    font-size: x-large;
+    word-wrap: break-word;
+    width: 150px;
+    text-align: center;
+    cursor: default;
+}

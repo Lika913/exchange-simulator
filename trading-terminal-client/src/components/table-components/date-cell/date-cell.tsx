@@ -1,4 +1,4 @@
-import { IDateCellProps } from '../../../../../../types/props/date-cell-props';
+import { IDateCellProps } from '../../../types/props/date-cell-props';
 import Cell from '../cell/cell'
 import './date-cell.css';
 

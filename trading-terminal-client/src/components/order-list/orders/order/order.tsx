@@ -1,15 +1,15 @@
 import './order.css';
 import { INSTRUMENTS } from '../../../../constants/instruments';
-import Cell from './cells/cell/cell';
 import CancellationMark from './cancellation-mark/cancellation-mark';
 import { IOrderProps } from '../../../../types/props/order-props';
-import DateCell from './cells/date-cell/date-cell';
-import { COLORS_SIDE_TEXT } from '../../../../constants/colors';
+import { COLORS_SIDE } from '../../../../constants/colors';
+import Cell from '../../../table-components/cell/cell';
+import DateCell from '../../../table-components/date-cell/date-cell';
 
 const Order = (props: IOrderProps): JSX.Element => {
 
   const { order } = props
-  const color: string = COLORS_SIDE_TEXT[order.side]
+  const color: string = COLORS_SIDE[order.side]
 
   return (
     <>
@@ -20,14 +20,17 @@ const Order = (props: IOrderProps): JSX.Element => {
       <Cell 
         value={order.side} 
         color={color}
+        weight="bold"
       />
       <Cell 
         value={order.price} 
         color={color}
+        weight="bold"
       />
       <Cell 
         value={order.amount} 
         color={color}
+        weight="bold"
       />
       <Cell value={INSTRUMENTS[order.instrument]}/>
       <CancellationMark 

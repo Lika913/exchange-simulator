@@ -1,0 +1,12 @@
+.designation {
+    display: flex;
+    grid-area: d;
+    background-color: #3e3e3e;
+    color: var(--gray-light);
+    box-shadow: 0px 2px 5px var(--shadow-color);  
+    font-size: 45px;
+    align-items: center;    
+    justify-content: center;
+    cursor: default;
+    border-radius: 5px;
+}

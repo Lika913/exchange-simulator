@@ -1,0 +1,18 @@
+.position-scoreboard {
+    grid-area: p;
+    display: flex;
+    padding: 10px;
+    gap: 5px;
+    background-color: var(--primary-color);
+    box-shadow: 0px 2px 5px var(--shadow-color);    
+    align-items: center;
+    justify-content: space-between;
+}
+
+.position-scoreboard .partition {
+    flex: 0.01;
+    width: 2px;
+    height: 100%;
+    margin: 5px;
+    background-color: var(--gray);
+}

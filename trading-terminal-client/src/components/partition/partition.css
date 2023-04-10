@@ -1,0 +1,4 @@
+.partition {
+    width: 2px;
+    background-color: var(--gray);
+}

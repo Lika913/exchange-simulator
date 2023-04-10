@@ -1,21 +1,22 @@
 import './ticker.css';
-import { GlobalStateContext, SendMassegeDiapatch } from '../context-provider/context-provider';
+import { GlobalStateContext, SendMassegeDispatch } from '../context-provider/context-provider';
 import { IGlobalState } from '../../types/global-state';
 import { Instrument } from '../../types/order/instrument';
 import { IOrder } from '../../types/order/order';
 import { Side } from '../../types/order/side';
 import { IWebsocketClient } from '../../types/websocket-client';
 import OrderAmount from './order-amount/order-amount';
-import PlaceOrder from './place-order/place-order';
+import PlaceOrder from './side-order/side-order';
 import React, { useState } from 'react'
 import TradingInstrument from './trading-instrument/trading-instrument';
+import Partition from '../partition/partition';
 
 const Ticker = (): JSX.Element => {
 
   const [instrument, setInstrument] = useState<Instrument | "">("")
-  const [amount, setAmount] = useState<number>(0)
-  const { prices } = React.useContext(GlobalStateContext) as IGlobalState;
-  const websocketClient = React.useContext(SendMassegeDiapatch) as IWebsocketClient;
+  const [amount, setAmount] = useState<number | "">("")
+  const { prices, subscriptionId } = React.useContext(GlobalStateContext) as IGlobalState;
+  const websocketClient = React.useContext(SendMassegeDispatch) as IWebsocketClient;
  
   const placeOrder = (side: Side) => {
 
@@ -30,7 +31,7 @@ const Ticker = (): JSX.Element => {
       change_time: now,
       status: 'Active',
       side: side,
-      price: prices[side],
+      price: Number((prices[side] * amount).toFixed(3)),
       amount: amount,
       instrument: instrument,
     }
@@ -38,7 +39,8 @@ const Ticker = (): JSX.Element => {
     websocketClient.placeOrder(newOrder)
 
     setInstrument("")
-    setAmount(0)
+    setAmount("")
+    websocketClient.unsubscribeMarketData(subscriptionId)
   }
 
   return (
@@ -55,13 +57,13 @@ const Ticker = (): JSX.Element => {
         <PlaceOrder
           buttonLabel="Sell"
           onClick={() => placeOrder("Sell")}
-          price={prices["Sell"]}
+          price={prices["Sell"] * (amount || 1)}
         />
-        <div className='partition' />
+        <Partition />
         <PlaceOrder
           buttonLabel="Buy"
           onClick={() => placeOrder("Buy")}
-          price={prices["Buy"]}
+          price={prices["Buy"] * (amount || 1)}
         />
       </div>
     </div>

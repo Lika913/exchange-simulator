@@ -5,6 +5,7 @@ import { ISubscription } from "../types/subscription";
 import { MarketDataUpdate } from './market-update-data';
 import { SuccessInfo } from './success-info';
 import { ErrorInfo } from './error-info';
+import { GeneratePrices } from '../helpers/generators';
 
 export const SubscribeMarketData = (
     data: ISubscribeMarketDataMessage, 
@@ -19,7 +20,8 @@ export const SubscribeMarketData = (
 
         subscriptions.push(subscription);
 
-        MarketDataUpdate(subscription, wsClient);
+        const prices = GeneratePrices(subscription.instrument)
+        MarketDataUpdate(subscription.subscriptionId, prices, wsClient);
         SuccessInfo(subscription.subscriptionId, wsClient);
     } catch (err) {
         ErrorInfo((err as Error)?.message, wsClient);      

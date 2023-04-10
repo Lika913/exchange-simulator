@@ -7,7 +7,8 @@ export const CancelOrder = (data: ICancelOrderMessage, wsServer: WebSocketServer
     const order = orders.find(order => order.id === data.orderId)
     if (!order) return;
 
-    order.status = "Cancelled"    
+    order.status = "Cancelled"   
+    order.change_time = new Date(); 
 
     wsServer.clients.forEach((wsClient: WebSocket) => {
         ExecutionReport(wsClient)    

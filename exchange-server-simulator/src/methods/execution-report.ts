@@ -5,7 +5,7 @@ import { orders } from '../data/orders';
 
 export const ExecutionReport = (wsClient: WebSocket) => {
     const message: IMessage = {
-        messageType: MESSAGE_TO_CLIENT.Report,
+        messageType: MESSAGE_TO_CLIENT.ExecutionReport,
         message: { orders }
     }
     wsClient.send(JSON.stringify(message))

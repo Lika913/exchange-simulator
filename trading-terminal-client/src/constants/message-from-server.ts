@@ -1,6 +1,7 @@
 export enum MESSAGE_FROM_SERVER {
-    MarketDataUpdate = 6,
-    SuccessInfo = 7,
-    ErrorInfo = 8,
-    Report = 9,
+    MarketDataUpdate = 2000,
+    SuccessInfo,
+    ErrorInfo,
+    ExecutionReport,
+    PositionUpdateData,
 }

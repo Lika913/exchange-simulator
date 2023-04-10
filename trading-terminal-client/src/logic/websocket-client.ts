@@ -11,12 +11,17 @@ import { IPlaceOrderMessage } from "../types/messages/outgoing-messages/place-or
 import { ICancelOrderMessage } from "../types/messages/outgoing-messages/cancel-order-message";
 import { IWebsocketClient } from "../types/websocket-client";
 import { IErrorInfoMessage } from "../types/messages/incoming-messages/error-info-message";
+import { Side } from "../types/order/side";
+import { IPositionUpdateDataMessage } from "../types/messages/incoming-messages/position-update-data-message";
+import { Instrument } from "../types/order/instrument";
+import { Position } from "../types/position";
 
 export const createWebsocketClient = (
-    setPriceSell: React.Dispatch<React.SetStateAction<number>>,
-    setPriceBuy: React.Dispatch<React.SetStateAction<number>>,
+    setPrices: React.Dispatch<React.SetStateAction<Record<Side, number>>>,
     setSubscriptionId: React.Dispatch<React.SetStateAction<string>>,
-    setOrders: React.Dispatch<React.SetStateAction<IOrder[]>>): IWebsocketClient => {
+    setOrders: React.Dispatch<React.SetStateAction<IOrder[]>>,
+    setPositions: React.Dispatch<React.SetStateAction<Record<Instrument, Position>>>,
+    ): IWebsocketClient => {
 
     const ws = new WebSocket("ws://localhost:9000");
 
@@ -26,8 +31,7 @@ export const createWebsocketClient = (
         switch (data.messageType) {
             case MESSAGE_FROM_SERVER.MarketDataUpdate:
                 const marketDataUpdateMessage = data.message as IMarketDataUpdateMessage;
-                setPriceSell(marketDataUpdateMessage.priceSell);
-                setPriceBuy(marketDataUpdateMessage.priceBuy);
+                setPrices(marketDataUpdateMessage.prices)
                 break;
             case MESSAGE_FROM_SERVER.SuccessInfo:
                 const successInfoMessage = data.message as ISuccessInfoMessage;
@@ -37,15 +41,15 @@ export const createWebsocketClient = (
                 const errorInfoMessage = data.message as IErrorInfoMessage;
                 alert(errorInfoMessage.reason);
                 break;
-            case MESSAGE_FROM_SERVER.Report:
+            case MESSAGE_FROM_SERVER.ExecutionReport:
                 const reportMessage = data.message as IReportMessage;
                 setOrders(reportMessage.orders);
                 break;
+            case MESSAGE_FROM_SERVER.PositionUpdateData:
+                const positionUpdateDataMessage = data.message as IPositionUpdateDataMessage;
+                setPositions(positionUpdateDataMessage.positionsData)
+                break;
         }
-    }
-
-    ws.onopen = () => {
-        executionReport()
     }
 
     const send = (message: IMessage<object>) => {
@@ -84,18 +88,10 @@ export const createWebsocketClient = (
         send(message)
     }
 
-    const executionReport = () => {
-        const message: IMessage<object> = {
-            messageType: MESSAGE_TO_SERVER.ExecutionReport
-        }
-        send(message)
-    }
-
     return {
         subscribeMarketData,
         unsubscribeMarketData,
         placeOrder,
-        cancelOrder,
-        executionReport
+        cancelOrder
     }
 }

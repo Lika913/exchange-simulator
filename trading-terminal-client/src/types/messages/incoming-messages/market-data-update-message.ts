@@ -1,5 +1,6 @@
+import { Side } from "../../order/side";
+
 export interface IMarketDataUpdateMessage {
     subscriptionId: string,
-    priceSell: number,
-    priceBuy: number,
+    prices: Record<Side, number>
 }

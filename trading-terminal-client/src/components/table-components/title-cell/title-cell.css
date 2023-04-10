@@ -1,5 +1,5 @@
 .title {    
     font-weight: 800;
     border-bottom: 2px solid var(--gray);
-
+    cursor: default;
 }

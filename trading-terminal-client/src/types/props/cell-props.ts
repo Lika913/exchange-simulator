@@ -1,4 +1,5 @@
 export interface ICellProps {
-    value?: string | number
-    color?: string
+    value?: string | number | undefined
+    color?: string | undefined
+    weight?: string | number | undefined
 }

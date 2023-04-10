@@ -1,8 +1,9 @@
 .ticker {
-    width: 200px;
+    grid-area: t;
+    width: 310px;
     height: min-content;
     padding: 20px;
-    background-color: var(--main-background-color);
+    background-color: var(--primary-color);
     box-shadow: 0px 2px 5px var(--shadow-color);
     display: flex;
     flex-direction: column;
