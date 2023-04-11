@@ -4,22 +4,22 @@ import { Instrument } from '../../types/order/instrument';
 import InstrumentPosition from './instrument-position/instrument-position';
 import { PositionsContext } from '../context-provider/context-provider';
 import Partition from '../partition/partition';
+import { insertBetweenElements } from '../../logic/helpers';
 
 const PositionScoreboard = (): JSX.Element => {
     const positions = useContext(PositionsContext);
-    const entries = Object.entries(positions);
+    const elements = Object.entries(positions).map(([instrument, position]) =>
+        <InstrumentPosition
+            key={instrument}
+            instrument={instrument as Instrument}
+            prices={position}
+        />);
+
+    insertBetweenElements(elements, <Partition />)
 
     return (
         <div className="position-scoreboard">
-            {entries.map(([instrument, position], index) =>
-                <>
-                    <InstrumentPosition
-                        instrument={instrument as Instrument}
-                        prices={position}
-                    />
-                    {index !== entries.length - 1 ? <Partition /> : null}
-                </>
-            )}
+            {elements}
         </div>);
 }
 

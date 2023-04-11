@@ -17,10 +17,10 @@ import { Instrument } from "../types/order/instrument";
 import { Position } from "../types/position";
 
 export const createWebsocketClient = (
-    setPrices: React.Dispatch<React.SetStateAction<Record<Side, number>>>,
-    setSubscriptionId: React.Dispatch<React.SetStateAction<string>>,
-    setOrders: React.Dispatch<React.SetStateAction<IOrder[]>>,
-    setPositions: React.Dispatch<React.SetStateAction<Record<Instrument, Position>>>,
+    onMarketDataUpdate: (x: Record<Side, number>) => void,
+    onSuccessInfo: (x: string) => void,
+    onExecutionReport: (x: IOrder[]) => void,
+    onPositionUpdateData: (x: Record<Instrument, Position>) => void,
     ): IWebsocketClient => {
 
     const ws = new WebSocket("ws://localhost:9000");
@@ -31,11 +31,11 @@ export const createWebsocketClient = (
         switch (data.messageType) {
             case MESSAGE_FROM_SERVER.MarketDataUpdate:
                 const marketDataUpdateMessage = data.message as IMarketDataUpdateMessage;
-                setPrices(marketDataUpdateMessage.prices)
+                onMarketDataUpdate(marketDataUpdateMessage.prices)
                 break;
             case MESSAGE_FROM_SERVER.SuccessInfo:
                 const successInfoMessage = data.message as ISuccessInfoMessage;
-                setSubscriptionId(successInfoMessage.subscriptionId);
+                onSuccessInfo(successInfoMessage.subscriptionId);
                 break;
             case MESSAGE_FROM_SERVER.ErrorInfo:
                 const errorInfoMessage = data.message as IErrorInfoMessage;
@@ -43,11 +43,11 @@ export const createWebsocketClient = (
                 break;
             case MESSAGE_FROM_SERVER.ExecutionReport:
                 const reportMessage = data.message as IReportMessage;
-                setOrders(reportMessage.orders);
+                onExecutionReport(reportMessage.orders);
                 break;
             case MESSAGE_FROM_SERVER.PositionUpdateData:
                 const positionUpdateDataMessage = data.message as IPositionUpdateDataMessage;
-                setPositions(positionUpdateDataMessage.positionsData)
+                onPositionUpdateData(positionUpdateDataMessage.positionsData)
                 break;
         }
     }
