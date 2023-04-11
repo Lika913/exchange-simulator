@@ -5,4 +5,5 @@ export interface IWebsocketClient {
     unsubscribeMarketData: (subscriptionId: string) => void
     placeOrder: (order: IOrder) => void
     cancelOrder: (orderId: number) => void
+    closeConnection: () => void
 }

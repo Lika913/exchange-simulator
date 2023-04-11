@@ -88,10 +88,17 @@ export const createWebsocketClient = (
         send(message)
     }
 
+    const closeConnection = () => {        
+        if (ws.readyState === ws.OPEN) {
+            ws.close();
+        }
+    }
+
     return {
         subscribeMarketData,
         unsubscribeMarketData,
         placeOrder,
-        cancelOrder
+        cancelOrder,
+        closeConnection
     }
 }

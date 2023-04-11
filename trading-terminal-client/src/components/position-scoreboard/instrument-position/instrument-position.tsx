@@ -8,14 +8,14 @@ import SideValue from '../side-value/side-value';
 
 const InstrumentPosition = (props: IInstrumentPositionProps): JSX.Element => {
 
-    const benefit = Number((props.prices["Buy"] - props.prices["Sell"]).toFixed(3))
+    const benefit = Number((props.prices["Buy"] - props.prices["Sell"]).toFixed(3));
    
     let color: string | undefined;
     if (benefit > 0) {
-        color = COLORS_SIDE["Buy"]
+        color = COLORS_SIDE["Buy"];
     }
     if (benefit < 0) {
-        color = COLORS_SIDE["Sell"]
+        color = COLORS_SIDE["Sell"];
     }
 
     return (

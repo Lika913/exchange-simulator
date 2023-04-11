@@ -1,21 +1,19 @@
 import './trading-instrument.css';
 import { ITradingInstrumentProps } from '../../../types/props/trading-instrument-props';
-import { GlobalStateContext, SendMassegeDispatch } from '../../context-provider/context-provider';
-import { IGlobalState } from '../../../types/global-state';
-import { IWebsocketClient } from '../../../types/websocket-client';
+import { WebsocketClientContext, SubscriptionIdContext } from '../../context-provider/context-provider';
 import { INSTRUMENTS } from '../../../constants/instruments';
 import { useContext } from 'react';
 
 const TradingInstrument = (props: ITradingInstrumentProps): JSX.Element => {
 
-  const websocketClient = useContext(SendMassegeDispatch) as IWebsocketClient;
-  const { subscriptionId } = useContext(GlobalStateContext) as IGlobalState;
+  const websocketClient = useContext(WebsocketClientContext);
+  const subscriptionId = useContext(SubscriptionIdContext);
 
   const onChange = (event: any) => {
-    websocketClient.unsubscribeMarketData(subscriptionId)
-    websocketClient.subscribeMarketData(event.target.value)
+    websocketClient?.unsubscribeMarketData(subscriptionId);
+    websocketClient?.subscribeMarketData(event.target.value);
 
-    props.setInstrument(event.target.value)
+    props.setInstrument(event.target.value);
   }
 
   return (

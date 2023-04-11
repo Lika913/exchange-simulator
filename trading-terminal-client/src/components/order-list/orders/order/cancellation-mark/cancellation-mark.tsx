@@ -1,15 +1,14 @@
+import './cancellation-mark.css';
 import { useContext } from 'react';
 import { ICancellationMarkProps } from '../../../../../types/props/cancellation-mark-props';
-import './cancellation-mark.css';
-import { SendMassegeDispatch } from '../../../../context-provider/context-provider';
-import { IWebsocketClient } from '../../../../../types/websocket-client';
+import { WebsocketClientContext } from '../../../../context-provider/context-provider';
 
 const CancellationMark = (props: ICancellationMarkProps): JSX.Element => {
 
-  const websocketClient = useContext(SendMassegeDispatch) as IWebsocketClient;
+  const websocketClient = useContext(WebsocketClientContext);
 
   const cancelOrder = () => {
-    websocketClient.cancelOrder(props.order.id as number)
+    websocketClient?.cancelOrder(props.order.id as number);
   }
 
   return (

@@ -1,10 +1,8 @@
 import './ticker.css';
-import { GlobalStateContext, SendMassegeDispatch } from '../context-provider/context-provider';
-import { IGlobalState } from '../../types/global-state';
+import { WebsocketClientContext, SubscriptionIdContext, PricesContext } from '../context-provider/context-provider';
 import { Instrument } from '../../types/order/instrument';
 import { IOrder } from '../../types/order/order';
 import { Side } from '../../types/order/side';
-import { IWebsocketClient } from '../../types/websocket-client';
 import OrderAmount from './order-amount/order-amount';
 import PlaceOrder from './side-order/side-order';
 import React, { useState } from 'react'
@@ -12,11 +10,12 @@ import TradingInstrument from './trading-instrument/trading-instrument';
 import Partition from '../partition/partition';
 
 const Ticker = (): JSX.Element => {
+  const [instrument, setInstrument] = useState<Instrument | "">("");
+  const [amount, setAmount] = useState<number | "">("");
 
-  const [instrument, setInstrument] = useState<Instrument | "">("")
-  const [amount, setAmount] = useState<number | "">("")
-  const { prices, subscriptionId } = React.useContext(GlobalStateContext) as IGlobalState;
-  const websocketClient = React.useContext(SendMassegeDispatch) as IWebsocketClient;
+  const prices = React.useContext(PricesContext);
+  const subscriptionId = React.useContext(SubscriptionIdContext);
+  const websocketClient = React.useContext(WebsocketClientContext);
  
   const placeOrder = (side: Side) => {
 
@@ -36,11 +35,11 @@ const Ticker = (): JSX.Element => {
       instrument: instrument,
     }
 
-    websocketClient.placeOrder(newOrder)
+    websocketClient?.placeOrder(newOrder)
 
     setInstrument("")
     setAmount("")
-    websocketClient.unsubscribeMarketData(subscriptionId)
+    websocketClient?.unsubscribeMarketData(subscriptionId)
   }
 
   return (

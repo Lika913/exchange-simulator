@@ -1,12 +1,10 @@
 import './orders.css';
 import { useContext } from 'react';
-import { GlobalStateContext } from '../../context-provider/context-provider';
-import { IGlobalState } from '../../../types/global-state';
+import { OrdersContext } from '../../context-provider/context-provider';
 import Order from './order/order';
 
 const Orders = (): JSX.Element => {
-
-    const { orders } = useContext(GlobalStateContext) as IGlobalState
+    const orders = useContext(OrdersContext)
 
     return (
         <div className='orders'>
