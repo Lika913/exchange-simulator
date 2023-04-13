@@ -1,6 +1,9 @@
 # Exchange-simulator
 Простой симулятор биржи c клиент-серверной архитектурой. Клиент (торговый терминал) подключается к серверу по протоколу websocket и взаимодействует с его API. 
-Back часть - это не полноценный сервер, она лишь имитирует его поведение, чтобы клиент мог полноценно работать.
+Back часть - это не полноценный сервер, она лишь имитирует его поведение, чтобы клиент отрабатывал в полной мере.
+
+## Preview
+![Image alt](https://github.com/Lika913/sources/raw/master/imgs/exchange-simulator.PNG)
 
 Функционал, который клиент реализует:
 * `есть возможность выбрать торговый инструмент (актив)`
@@ -11,18 +14,18 @@ Back часть - это не полноценный сервер, она лиш
 * `приходят уведомления об изменениях статуса заявок, ошибок соединения и т.д.`
 * `отображаются позиции в терминале с актуальными данными`
 
-## Стек технологий
+## Tech stack
 * <a href="https://www.typescriptlang.org/">typescript</a>
 * <a href="https://ru.reactjs.org/">react</a>
 * <a href="https://www.npmjs.com/package/jest-websocket-mock">jest-websocket-mock</a>
 
-### Для запуска серверной части необходимо перейти в папку exchange-server-simulator, и выполнить: 
+### To start the server part, go to the exchange-server-simulator folder and run:
 
 * `npm i` - установит необходимые зависимости
 * `npm start` - запустит симулятор сервера
 
 
-### Для запуска торгового терминала необходимо перейти в папку trading-terminal-client, и выполнить: 
+### To start the trading terminal, go to the trading-terminal-client folder and run:
 
 * `npm i` - также установит необходимые зависимости
 * `npm start` - запустит клиента
