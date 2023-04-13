@@ -4,4 +4,5 @@ export enum MESSAGE_TO_CLIENT {
     ErrorInfo,
     ExecutionReport,
     PositionUpdateData,
+    OrderStatusUpdate
 }

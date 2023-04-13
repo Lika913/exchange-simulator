@@ -1,3 +1,4 @@
+import { showErrorNotification } from '../../../logic/notification-helper';
 import { IDesignationProps } from '../../../types/props/designation-props';
 import './designation.css';
 

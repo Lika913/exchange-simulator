@@ -8,6 +8,7 @@ import SideOrder from './side-order/side-order';
 import React, { useState } from 'react'
 import TradingInstrument from './trading-instrument/trading-instrument';
 import Partition from '../../independent-components/partition/partition';
+import { showErrorNotification, showSuccessNotification } from '../../../logic/notification-helper';
 
 const Ticker = (): JSX.Element => {
   const [instrument, setInstrument] = useState<Instrument | "">("");
@@ -16,11 +17,10 @@ const Ticker = (): JSX.Element => {
   const prices = React.useContext(PricesContext);
   const subscriptionId = React.useContext(SubscriptionIdContext);
   const websocketClient = React.useContext(WebsocketClientContext);
- 
-  const placeOrder = (side: Side) => {
 
+  const placeOrder = (side: Side) => {
     if (!amount || !instrument) {
-      alert("\u{1F9D0} Вы не заполнили все необходимые данные")
+      showErrorNotification("\u{1F9D0} Вы не заполнили все необходимые данные");
       return
     }
 
@@ -30,11 +30,14 @@ const Ticker = (): JSX.Element => {
       amount: amount,
       instrument: instrument,
     }
-    websocketClient?.placeOrder(newOrder)
 
-    setInstrument("")
-    setAmount("")
-    websocketClient?.unsubscribeMarketData(subscriptionId)
+    if (websocketClient?.placeOrder(newOrder)) {
+      showSuccessNotification("\u{1F44D} Заявка успешно создана")
+
+      setInstrument("")
+      setAmount("")
+      websocketClient?.unsubscribeMarketData(subscriptionId)
+    }
   }
 
   return (

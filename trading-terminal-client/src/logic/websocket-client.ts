@@ -16,23 +16,26 @@ import { IPositionUpdateDataMessage } from "../types/messages/incoming-messages/
 import { Instrument } from "../types/order/instrument";
 import { Position } from "../types/position";
 import { CONNECTION_URL } from "../constants/url";
+import { showErrorNotification, showSuccessNotification } from "./notification-helper";
+import { IOrderStatusUpdateMessage } from "../types/messages/incoming-messages/order-status-update-message";
+import { Status } from "../types/order/status";
 
 export const createWebsocketClient = (
     onMarketDataUpdate: (x: Record<Side, number>) => void,
     onSuccessInfo: (x: string) => void,
     onExecutionReport: (x: IOrder[]) => void,
     onPositionUpdateData: (x: Record<Instrument, Position>) => void,
-    ): IWebsocketClient => {
+): IWebsocketClient => {
 
     const ws = new WebSocket(CONNECTION_URL);
 
     ws.onmessage = msg => {
         const data = JSON.parse(msg.data) as IMessage;
-        
+
         switch (data.messageType) {
             case MESSAGE_FROM_SERVER.MarketDataUpdate:
                 const marketDataUpdateMessage = data.message as IMarketDataUpdateMessage;
-                onMarketDataUpdate(marketDataUpdateMessage.prices)
+                onMarketDataUpdate(marketDataUpdateMessage.prices);
                 break;
             case MESSAGE_FROM_SERVER.SuccessInfo:
                 const successInfoMessage = data.message as ISuccessInfoMessage;
@@ -40,7 +43,7 @@ export const createWebsocketClient = (
                 break;
             case MESSAGE_FROM_SERVER.ErrorInfo:
                 const errorInfoMessage = data.message as IErrorInfoMessage;
-                alert(errorInfoMessage.reason);
+                showErrorNotification(errorInfoMessage.reason);
                 break;
             case MESSAGE_FROM_SERVER.ExecutionReport:
                 const reportMessage = data.message as IExecutionReportMessage;
@@ -48,48 +51,65 @@ export const createWebsocketClient = (
                 break;
             case MESSAGE_FROM_SERVER.PositionUpdateData:
                 const positionUpdateDataMessage = data.message as IPositionUpdateDataMessage;
-                onPositionUpdateData(positionUpdateDataMessage.positionsData)
+                onPositionUpdateData(positionUpdateDataMessage.positionsData);
+                break;
+            case MESSAGE_FROM_SERVER.OrderStatusUpdate:
+                const orderStatusUpdateMessage = data.message as IOrderStatusUpdateMessage;
+                showSuccessNotification(
+                    `\u{2757} У заявки ${orderStatusUpdateMessage.id} ` +
+                    `изменился статус на '${orderStatusUpdateMessage.status}'`
+                );
                 break;
         }
     }
 
-    const send = (message: IMessage) => {
-        ws.send(JSON.stringify(message))
+    ws.onerror = () => {
+        showErrorNotification("Ошибка соединения. Пожалуйста, убедитесь, что сервер запущен.");
     }
 
-    const subscribeMarketData = (instrument: Instrument) => {
+    const send = (message: IMessage): boolean => {
+        if (ws.readyState === ws.OPEN) {
+            ws.send(JSON.stringify(message))
+            return true;
+        } else {
+            showErrorNotification("Соединение с сервером не установлено")
+            return false;
+        }
+    }
+
+    const subscribeMarketData = (instrument: Instrument): boolean => {
         const message: IMessage<ISubscribeMarketDataMessage> = {
             messageType: MESSAGE_TO_SERVER.SubscribeMarketData,
             message: { instrument }
         }
-        send(message)
+        return send(message);
     }
 
-    const unsubscribeMarketData = (subscriptionId: string) => {
+    const unsubscribeMarketData = (subscriptionId: string): boolean => {
         const message: IMessage<IUnsubscribeMarketDataMessage> = {
             messageType: MESSAGE_TO_SERVER.UnsubscribeMarketData,
             message: { subscriptionId }
         }
-        send(message)
+        return send(message);
     }
 
-    const placeOrder = (order: IOrder) => {
+    const placeOrder = (order: IOrder): boolean => {
         const message: IMessage<IPlaceOrderMessage> = {
             messageType: MESSAGE_TO_SERVER.PlaceOrder,
             message: { order }
         }
-        send(message)
+        return send(message)
     }
 
-    const cancelOrder = (orderId: number) => {
+    const cancelOrder = (orderId: number): boolean => {
         const message: IMessage<ICancelOrderMessage> = {
             messageType: MESSAGE_TO_SERVER.CancelOrder,
             message: { orderId }
         }
-        send(message)
+        return send(message)
     }
 
-    const closeConnection = () => {        
+    const closeConnection = () => {
         if (ws.readyState === ws.OPEN) {
             ws.close();
         }

@@ -2,6 +2,7 @@ import './cancellation-mark.css';
 import { useContext } from 'react';
 import { ICancellationMarkProps } from '../../../../../../types/props/cancellation-mark-props';
 import { WebsocketClientContext } from '../../../../../context-provider/context-provider';
+import { showSuccessNotification } from '../../../../../../logic/notification-helper';
 
 const CancellationMark = (props: ICancellationMarkProps): JSX.Element => {
 
@@ -9,6 +10,7 @@ const CancellationMark = (props: ICancellationMarkProps): JSX.Element => {
 
   const cancelOrder = () => {
     websocketClient?.cancelOrder(props.order.id as number);
+    showSuccessNotification(`Заявка ${props.order.id} успешно отменена`)
   }
 
   return (

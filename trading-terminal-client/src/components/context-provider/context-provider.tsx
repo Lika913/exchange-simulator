@@ -6,6 +6,7 @@ import { IOrder } from '../../types/order/order';
 import { Side } from '../../types/order/side';
 import { Instrument } from '../../types/order/instrument';
 import { Position } from '../../types/position';
+import { Status } from '../../types/order/status';
 
 const initialPrices: Record<Side, number> = { Buy: 0, Sell: 0 }
 const initialSubscriptionId: string = ""
@@ -13,7 +14,7 @@ const initialOrders: IOrder[] = []
 const initialPositions: Record<Instrument, Position> = {
     eur_rub: { Buy: 0, Sell: 0 },
     eur_usd: { Buy: 0, Sell: 0 },
-    usd_rub: { Buy: 0, Sell: 0 }
+    usd_rub: { Buy: 0, Sell: 0 },
 }
 
 export const WebsocketClientContext = React.createContext<IWebsocketClient | null>(null);

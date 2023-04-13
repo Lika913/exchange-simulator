@@ -24,7 +24,7 @@ wsServer.on('connection', (wsClient: WebSocket) => {
     const subscriptions: ISubscription[] = []
    
     wsClient.on('message', (message: string) => {
-        const messageData: IMessage = JSON.parse(message)
+        const messageData: IMessage = JSON.parse(message);
 
         switch (messageData.messageType) {
             case MESSAGE_FROM_CLIENT.SubscribeMarketData:

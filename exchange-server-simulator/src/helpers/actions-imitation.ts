@@ -6,6 +6,7 @@ import { Status } from "../types/status"
 import { ExecutionReport } from "../methods/execution-report"
 import { GeneratePrices } from "./generators"
 import { PositionUpdateData } from "../methods/position-update-data"
+import { OrderStatusUpdate } from "../methods/order-status-update"
 
 export const ImitatePricesChange = (
     subscriptions: ISubscription[],
@@ -28,8 +29,9 @@ export const ImitateFulfillmentOrder = (wsServer: WebSocketServer) => {
         order.changeTime = new Date();
  
         wsServer.clients.forEach((wsClient: WebSocket) => {
+            OrderStatusUpdate(order, wsClient);
             ExecutionReport(wsClient);
             PositionUpdateData(wsClient);
         })
-    }, 10000)
+    }, 10000);
 }

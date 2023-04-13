@@ -1,0 +1,17 @@
+.notification {
+    border-radius: 10px;
+    position: absolute;
+    width: 300px;
+    word-wrap: break-word;
+    padding: 7px;
+    top: 10px;
+    left: calc((100% - 300px) / 2);
+    opacity: 0;
+    text-align: center;
+    border: 1px solid black;
+    font-size: 14px;
+    transition: opacity 1s;
+    user-select: none;
+    font-size: 13px;
+    color: black;
+}

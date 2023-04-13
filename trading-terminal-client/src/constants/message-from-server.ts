@@ -4,4 +4,5 @@ export enum MESSAGE_FROM_SERVER {
     ErrorInfo,
     ExecutionReport,
     PositionUpdateData,
+    OrderStatusUpdate
 }
