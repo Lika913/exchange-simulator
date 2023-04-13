@@ -1,6 +1,7 @@
 import { Side } from "../order/side";
 
 export interface IButtonProps {
-    label: Side,
+    label: string,
     onClick: React.MouseEventHandler,
+    color?: string
 }
