@@ -4,7 +4,7 @@ import { Instrument } from '../../types/order/instrument';
 import { IOrder } from '../../types/order/order';
 import { Side } from '../../types/order/side';
 import OrderAmount from './order-amount/order-amount';
-import PlaceOrder from './side-order/side-order';
+import SideOrder from './side-order/side-order';
 import React, { useState } from 'react'
 import TradingInstrument from './trading-instrument/trading-instrument';
 import Partition from '../partition/partition';
@@ -24,17 +24,12 @@ const Ticker = (): JSX.Element => {
       return
     }
 
-    const now = new Date()
     const newOrder: IOrder = {
-      creation_time: now,
-      change_time: now,
-      status: 'Active',
       side: side,
       price: Number((prices[side] * amount).toFixed(3)),
       amount: amount,
       instrument: instrument,
     }
-
     websocketClient?.placeOrder(newOrder)
 
     setInstrument("")
@@ -52,14 +47,14 @@ const Ticker = (): JSX.Element => {
         amount={amount}
         setAmount={setAmount}
       />
-      <div className='place-orders'>
-        <PlaceOrder
+      <div className='side-orders'>
+        <SideOrder
           buttonLabel="Sell"
           onClick={() => placeOrder("Sell")}
           price={prices["Sell"] * (amount || 1)}
         />
         <Partition />
-        <PlaceOrder
+        <SideOrder
           buttonLabel="Buy"
           onClick={() => placeOrder("Buy")}
           price={prices["Buy"] * (amount || 1)}

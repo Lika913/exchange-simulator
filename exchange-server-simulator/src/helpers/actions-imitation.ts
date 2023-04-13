@@ -25,7 +25,7 @@ export const ImitateFulfillmentOrder = (wsServer: WebSocketServer) => {
         if (!order) return
 
         order.status = "Filled";
-        order.change_time = new Date();
+        order.changeTime = new Date();
  
         wsServer.clients.forEach((wsClient: WebSocket) => {
             ExecutionReport(wsClient);

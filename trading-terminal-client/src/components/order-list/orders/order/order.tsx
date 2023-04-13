@@ -14,8 +14,8 @@ const Order = (props: IOrderProps): JSX.Element => {
   return (
     <>
       <Cell value={order.id}/>
-      <DateCell value={order.creation_time}/>
-      <DateCell value={order.change_time}/>
+      <DateCell value={order.creationTime!}/>
+      <DateCell value={order.changeTime!}/>
       <Cell value={order.status}/>
       <Cell 
         value={order.side} 

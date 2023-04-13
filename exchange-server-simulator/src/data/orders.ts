@@ -3,8 +3,8 @@ import { IOrder } from "../types/order";
 export const orders: IOrder[] = [
     {
         id: 7,
-        creation_time: new Date("04-05-2023"),
-        change_time:  new Date("04-05-2023"),
+        creationTime: new Date("04-05-2023"),
+        changeTime:  new Date("04-05-2023"),
         status: "Cancelled",
         side: 'Buy',
         price: 657800,
@@ -13,8 +13,8 @@ export const orders: IOrder[] = [
     },
     {
         id: 6,
-        creation_time: new Date("04-06-2023"),
-        change_time: new Date("04-06-2023"),
+        creationTime: new Date("04-06-2023"),
+        changeTime: new Date("04-06-2023"),
         status: 'Active',
         side: 'Sell',
         price: 5.43,
@@ -23,8 +23,8 @@ export const orders: IOrder[] = [
     },
     {
         id: 5,
-        creation_time: new Date("04-01-2023"),
-        change_time: new Date("04-01-2023"),
+        creationTime: new Date("04-01-2023"),
+        changeTime: new Date("04-01-2023"),
         status: 'Active',
         side: 'Buy',
         price: 112433975.56,
@@ -33,8 +33,8 @@ export const orders: IOrder[] = [
     },
     {
         id: 4,
-        creation_time: new Date("04-02-2023"),
-        change_time: new Date("04-02-2023"),
+        creationTime: new Date("04-02-2023"),
+        changeTime: new Date("04-02-2023"),
         status: "Active",
         side: 'Buy',
         price: 4319.765,
@@ -43,8 +43,8 @@ export const orders: IOrder[] = [
     },
     {
         id: 3,
-        creation_time: new Date("03-30-2023"),
-        change_time: new Date("03-30-2023"),
+        creationTime: new Date("03-30-2023"),
+        changeTime: new Date("03-30-2023"),
         status: "Filled",
         side: 'Buy',
         price: 34345.09,
@@ -53,8 +53,8 @@ export const orders: IOrder[] = [
     },
     {
         id: 2,
-        creation_time: new Date("04-05-2023"),
-        change_time: new Date("06-05-2023"),
+        creationTime: new Date("04-05-2023"),
+        changeTime: new Date("06-05-2023"),
         status: 'Rejected',
         side: 'Sell',
         price: 65461.89,
@@ -63,8 +63,8 @@ export const orders: IOrder[] = [
     },
     {
         id: 1,
-        creation_time: new Date("04-01-2023"),
-        change_time: new Date("04-01-2023"),
+        creationTime: new Date("04-01-2023"),
+        changeTime: new Date("04-01-2023"),
         status: 'Active',
         side: 'Sell',
         price: 5.43,

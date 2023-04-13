@@ -16,7 +16,7 @@
     background-color: var(--gray);
 }
 
-.place-orders {
+.side-orders {
     display: flex;
     gap: 10px;
 }

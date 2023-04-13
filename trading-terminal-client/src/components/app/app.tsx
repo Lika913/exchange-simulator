@@ -6,12 +6,12 @@ import './app.css';
 
 const App = (): JSX.Element => {
   return (
-    <div className="app">
-      <Ticker />
-      <Designation label="Trading terminal" />
-      <PositionScoreboard />
-      <OrderList />
-    </div>
+      <div className="app">
+        <Ticker />
+        <Designation label="Trading terminal" />
+        <PositionScoreboard />
+        <OrderList />
+      </div>
   );
 }
 

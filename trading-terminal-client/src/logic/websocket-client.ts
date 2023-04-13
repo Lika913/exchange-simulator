@@ -3,7 +3,7 @@ import { MESSAGE_FROM_SERVER } from "../constants/message-from-server";
 import { IMessage } from "../types/messages/message";
 import { IOrder } from "../types/order/order";
 import { IMarketDataUpdateMessage } from "../types/messages/incoming-messages/market-data-update-message";
-import { IReportMessage } from "../types/messages/incoming-messages/report-message";
+import { IExecutionReportMessage } from "../types/messages/incoming-messages/execution-report-message";
 import { ISuccessInfoMessage } from "../types/messages/incoming-messages/success-info-message";
 import { ISubscribeMarketDataMessage } from "../types/messages/outgoing-messages/subscribe-market-data-message";
 import { IUnsubscribeMarketDataMessage } from "../types/messages/outgoing-messages/unsubscribe-market-data-message";
@@ -15,6 +15,7 @@ import { Side } from "../types/order/side";
 import { IPositionUpdateDataMessage } from "../types/messages/incoming-messages/position-update-data-message";
 import { Instrument } from "../types/order/instrument";
 import { Position } from "../types/position";
+import { CONNECTION_URL } from "../constants/url";
 
 export const createWebsocketClient = (
     onMarketDataUpdate: (x: Record<Side, number>) => void,
@@ -23,11 +24,11 @@ export const createWebsocketClient = (
     onPositionUpdateData: (x: Record<Instrument, Position>) => void,
     ): IWebsocketClient => {
 
-    const ws = new WebSocket("ws://localhost:9000");
+    const ws = new WebSocket(CONNECTION_URL);
 
     ws.onmessage = msg => {
-        const data = JSON.parse(msg.data) as IMessage<object>;
-
+        const data = JSON.parse(msg.data) as IMessage;
+        
         switch (data.messageType) {
             case MESSAGE_FROM_SERVER.MarketDataUpdate:
                 const marketDataUpdateMessage = data.message as IMarketDataUpdateMessage;
@@ -42,7 +43,7 @@ export const createWebsocketClient = (
                 alert(errorInfoMessage.reason);
                 break;
             case MESSAGE_FROM_SERVER.ExecutionReport:
-                const reportMessage = data.message as IReportMessage;
+                const reportMessage = data.message as IExecutionReportMessage;
                 onExecutionReport(reportMessage.orders);
                 break;
             case MESSAGE_FROM_SERVER.PositionUpdateData:
@@ -52,11 +53,11 @@ export const createWebsocketClient = (
         }
     }
 
-    const send = (message: IMessage<object>) => {
+    const send = (message: IMessage) => {
         ws.send(JSON.stringify(message))
     }
 
-    const subscribeMarketData = (instrument: number) => {
+    const subscribeMarketData = (instrument: Instrument) => {
         const message: IMessage<ISubscribeMarketDataMessage> = {
             messageType: MESSAGE_TO_SERVER.SubscribeMarketData,
             message: { instrument }

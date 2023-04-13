@@ -11,7 +11,7 @@ const Cell = (props: ICellProps): JSX.Element => {
                 fontWeight: props.weight
             }}
         >
-            { props.value}
+            { props.value }
         </div>
     );
 }

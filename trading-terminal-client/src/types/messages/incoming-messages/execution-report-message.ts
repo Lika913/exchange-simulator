@@ -1,5 +1,5 @@
 import { IOrder } from "../../order/order";
 
-export interface IReportMessage {
+export interface IExecutionReportMessage {
     orders: IOrder[]
 }

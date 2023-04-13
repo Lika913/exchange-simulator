@@ -3,17 +3,18 @@ import { ITradingInstrumentProps } from '../../../types/props/trading-instrument
 import { WebsocketClientContext, SubscriptionIdContext } from '../../context-provider/context-provider';
 import { INSTRUMENTS } from '../../../constants/instruments';
 import { useContext } from 'react';
+import { Instrument } from '../../../types/order/instrument';
 
 const TradingInstrument = (props: ITradingInstrumentProps): JSX.Element => {
 
   const websocketClient = useContext(WebsocketClientContext);
   const subscriptionId = useContext(SubscriptionIdContext);
 
-  const onChange = (event: any) => {
+  const onChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     websocketClient?.unsubscribeMarketData(subscriptionId);
-    websocketClient?.subscribeMarketData(event.target.value);
+    websocketClient?.subscribeMarketData(event.target.value as Instrument);
 
-    props.setInstrument(event.target.value);
+    props.setInstrument(event.target.value as Instrument);
   }
 
   return (

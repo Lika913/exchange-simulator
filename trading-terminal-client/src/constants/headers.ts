@@ -1,4 +1,4 @@
-export const headers: string[] = [
+export const TITLES_ORDERS: string[] = [
     "Id", 
     "Creation Time",
     "Change Time",

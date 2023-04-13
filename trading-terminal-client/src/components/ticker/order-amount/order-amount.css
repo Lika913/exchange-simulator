@@ -1,4 +1,4 @@
-.order-volume {
+.order-amount {
     width: 96%;
     padding: 5px;
     border-radius: 10px;
@@ -9,13 +9,13 @@
     outline: none;
 }
 
-.order-volume:hover,
-.order-volume:focus {
+.order-amount:hover,
+.order-amount:focus {
     border: 2px solid black;
     color: black;
 }
 
-.order-volume::-webkit-outer-spin-button,
-.order-volume::-webkit-inner-spin-button {
+.order-amount::-webkit-outer-spin-button,
+.order-amount::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }

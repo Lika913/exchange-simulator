@@ -1,12 +1,12 @@
 import './header.css';
-import { headers } from '../../../constants/headers';
 import TitleCell from '../../table-components/title-cell/title-cell';
+import { IHeaderProps } from '../../../types/props/header-props';
 
-const Header = (): JSX.Element => {
-
+const Header = (props: IHeaderProps): JSX.Element => {
+    
     return (
         <div className='header'>
-            {headers.map((header, index) =>
+            {props.titles.map((header, index) =>
                 <TitleCell
                     key={index}
                     title={header}

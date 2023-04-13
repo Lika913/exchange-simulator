@@ -1,3 +1,5 @@
+import { Instrument } from "../../order/instrument";
+
 export interface ISubscribeMarketDataMessage {
-    instrument: number
+    instrument: Instrument
 }

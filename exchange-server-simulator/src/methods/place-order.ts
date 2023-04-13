@@ -5,7 +5,14 @@ import { IPlaceOrderMessage } from "../types/incoming-messages/place-order-messa
 import { GenerateOrderId } from "../helpers/generators";
 
 export const PlaceOrder = (data: IPlaceOrderMessage, wsServer: WebSocketServer) => {
-    data.order.id = GenerateOrderId();
+    const { order } = data;
+
+    const now = new Date();
+    order.id = GenerateOrderId();
+    order.creationTime = now;
+    order.changeTime = now;
+    order.status = "Active";
+
     orders.unshift(data.order)
 
     wsServer.clients.forEach((wsClient: WebSocket) => {

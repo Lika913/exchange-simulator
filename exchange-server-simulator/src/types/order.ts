@@ -4,8 +4,8 @@ import { Status } from "./status"
 
 export interface IOrder {
     id?: number
-    creation_time: Date
-    change_time: Date
+    creationTime?: Date
+    changeTime?: Date
     status?: Status
     side: Side
     price: number

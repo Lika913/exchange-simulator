@@ -3,23 +3,23 @@ import { IOrderAmountProps } from '../../../types/props/order-amount-props';
 
 const OrderAmount = (props: IOrderAmountProps): JSX.Element => {
 
-  const clearFromSymbols = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (!event.key.match(/[0-9]/) && event.key !== "Backspace") {
-      event.preventDefault()
-    }
-  }
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value
 
-  const setAmount = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const valueNumber = Number(event.target.value)
-    props.setAmount(valueNumber)
+    if (value.match(/[^0-9]/)) {
+      event.preventDefault();
+      return;
+    }
+
+    props.setAmount(Number(value))
   }
 
   return (
     <input 
         type="text" 
-        className="order-volume"
-        onKeyDown={clearFromSymbols}
-        onChange={setAmount}
+        className="order-amount"
+        onChange={onChange}
+        data-testid="input-order-amount"
         value={props.amount}
     />
   );
