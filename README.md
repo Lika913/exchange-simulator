@@ -19,13 +19,13 @@ Back часть - это не полноценный сервер, она лиш
 * <a href="https://ru.reactjs.org/">react</a>
 * <a href="https://www.npmjs.com/package/jest-websocket-mock">jest-websocket-mock</a>
 
-#### To start the server part, go to the exchange-server-simulator folder and run:
+## To start the server part, go to the exchange-server-simulator folder and run:
 
 * `npm i` - установит необходимые зависимости
 * `npm start` - запустит симулятор сервера
 
 
-#### To start the trading terminal, go to the trading-terminal-client folder and run:
+## To start the trading terminal, go to the trading-terminal-client folder and run:
 
 * `npm i` - также установит необходимые зависимости
 * `npm start` - запустит клиента
