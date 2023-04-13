@@ -9,11 +9,11 @@
   "author": "frolova lika",
   "license": "ISC",
   "dependencies": {
-    "@types/ws": "^8.5.4",
     "uuid": "^9.0.0",
     "ws": "^8.13.0"
   },
-  "devDependencies": {
+  "devDependencies": {    
+    "@types/ws": "^8.5.4",
     "@types/node": "^18.15.11",
     "@types/uuid": "^9.0.1",
     "ts-node": "^10.9.1",
