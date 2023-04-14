@@ -14,13 +14,15 @@ let serverWS: WS;
 let container: HTMLElement;
 const prices = { Buy: 70.12, Sell: 545.6 }
 
-beforeEach(() => {
+beforeEach(async() => {
     serverWS = new WS(CONNECTION_URL, { jsonProtocol: true });
 
     ({ container } = render(
         <ContextProvider>
             <Ticker />
         </ContextProvider>));
+
+    await serverWS.connected;
 });
 
 afterEach(() => {
@@ -86,7 +88,8 @@ describe("Ticker component", () => {
 
     it("on change trading instrument should send UnsubscribeMarketData / SubscribeMarketData messages to server", async () => {
 
-        serverWS.send(messageSuccessInfo)
+        //simulate subscription
+        serverWS.send(messageSuccessInfo);
 
         const tradingInstrument = container.getElementsByClassName("trading-instrument")[0]
 

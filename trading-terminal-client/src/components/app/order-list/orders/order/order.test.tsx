@@ -23,13 +23,15 @@ const order: IOrder = {
     instrument: "eur_usd",
 };
 
-beforeEach(() => {
+beforeEach(async () => {
     serverWS = new WS(CONNECTION_URL, { jsonProtocol: true });
 
     ({ container } = render(
         <ContextProvider>
             <Order order={order} />
         </ContextProvider>));
+
+    await serverWS.connected;
 });
 
 afterEach(() => {
