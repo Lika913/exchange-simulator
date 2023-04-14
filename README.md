@@ -24,8 +24,11 @@ Back часть - это не полноценный сервер, она лиш
 * `npm i` - установит необходимые зависимости
 * `npm start` - запустит симулятор сервера
 
-
 ## To start the trading terminal, go to the trading-terminal-client folder and run:
 
 * `npm i` - также установит необходимые зависимости
 * `npm start` - запустит клиента
+
+### To run tests you need to run
+* `npm test`, после чего выбрать один из флагов для фильтра, например 
+* `a` - запустит все тесты
