@@ -10,7 +10,7 @@ import { positionsData } from "../../../constants/test-data";
 let container: HTMLElement;
 let serverWS: WS;
 
-beforeEach(() => {
+beforeEach(async() => {
 
     serverWS = new WS(CONNECTION_URL, { jsonProtocol: true });
 
@@ -18,6 +18,8 @@ beforeEach(() => {
         <ContextProvider>
             <PositionScoreboard />
         </ContextProvider>));
+
+    await serverWS.connected;
 });
 
 afterEach(() => {

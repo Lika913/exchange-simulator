@@ -17,6 +17,8 @@ beforeEach(async () => {
         <ContextProvider>
             <Orders />
         </ContextProvider>));
+
+    await serverWS.connected;
 });
 
 afterEach(() => {
